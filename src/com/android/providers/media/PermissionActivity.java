@@ -235,7 +235,8 @@ public class PermissionActivity extends Activity {
                     appInfo.packageName, null /* attributionTag */, verb);
         }
 
-        if (!shouldShowActionDialog) {
+        if (!shouldShowActionDialog || StorageScopesHooks.shouldSkipConfirmationDialog(this,
+                    getCallingPackage(), UserHandle.getUserHandleForUid(appInfo.uid).getIdentifier(), uris)) {
             onPositiveAction(null, 0);
             return;
         }
